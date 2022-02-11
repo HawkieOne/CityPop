@@ -1,50 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from './components/HomeScreen';
+import SearchScreen from './components/SearchScreen';
+import CityResults from './components/CityResults';
+import CountryResults from './components/CountryResults';
+import { SearchContext, SearchContextProvider } from "./shared/contexts";
+import React, { useState } from 'react';
+import { RecoilRoot } from 'recoil';
+
 
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>CityPop</Text>
-      <View style={styles.btnView}>
-        <Button 
-          title="SEARCH BY CITY" 
-          style={styles.btn} 
-          color="#B48EAD" 
-          onPress={() => console.log("1")} 
-          accessibilityLabel="Seacrh by city name"
-        />
-        <Button 
-          title="SEARCH BY COUNTRY" 
-          style={styles.btn} 
-          color="#5E81AC" 
-          onPress={() => console.log("2")} 
-          accessibilityLabel="Search by country name"
-        />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <RecoilRoot>
+      <NavigationContainer>
+        <Stack.Navigator 
+          initialRouteName="Home" 
+          screenOptions={{headerShown: false}}
+        >
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="SearchScreen" component={SearchScreen} />
+          <Stack.Screen name="CityResults" component={CityResults} />
+          <Stack.Screen name="CountryResults" component={CountryResults} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#2E3440',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 32,
-    marginTop: 'auto',
-  },
-  btnView: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-  btn: {
-    backgroundColor: '#4C566A',
-    color: '#5E81AC',
-    marginTop: '10%',
-  }
-});

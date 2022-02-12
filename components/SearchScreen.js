@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from './BackButton';
 import axios from 'axios';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { resultState, searchTypeState } from '../atoms/SearchType';
+import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 
 export default function SearchScreen() {
@@ -13,25 +13,31 @@ export default function SearchScreen() {
   const navigation = useNavigation();
 
   const searchType = useRecoilValue(searchTypeState);
-  const [results, setResults] = useRecoilState(resultState);
+  const [cityResults, setCityResults] = useRecoilState(resultCityState);
+  const [countryResults, setCountryResults] = useRecoilState(resultCountryState);
 
   const [text, onChangeText] = React.useState("");
 
   const buttonClickedHandler = () => {
-    axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
-    .then((response) => {
-      setResults(response.data);
-      console.log("TYPE");
-      console.log(searchType);
-      if (searchType === "city") {
+    if (searchType === 'city') {
+      axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
+      .then((response) => {
+        setCityResults(response.data);
         navigation.push("CityResults");
-      } else if (searchType === "country") {
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } else if (searchType === 'country') {
+      axios.get(`http://api.geonames.org/searchJSON?q=${text}&cities=cities1000&orderby=population&username=weknowit&maxRows=10`)
+      .then((response) => {
+        setCountryResults(response.data);
         navigation.push("CountryResults");
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
   };
 
   return (
@@ -72,8 +78,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   searchView: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
+    marginVertical: 'auto',
   },
   input: {
     height: 40,

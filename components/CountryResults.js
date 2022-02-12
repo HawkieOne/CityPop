@@ -1,23 +1,26 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView, BackHandler, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from './BackButton';
-import { useRecoilValue } from 'recoil';
-import { resultCountryState } from '../atoms/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { resultCityState, resultCountryState } from '../atoms/atoms';
+import { useNavigation } from '@react-navigation/native';
 
 export default function CountryResults() {
   
+  const navigation = useNavigation();
   const results = useRecoilValue(resultCountryState)
+  const [cityResults, setCityResults] = useRecoilState(resultCityState);
   console.log(results);
-
   const buttonClickedHandler = (city) => {
-    console.log(city);
+    setCityResults(city);
+    navigation.push("CityResults");
   };
 
   return (
     <View style={styles.screen}>
       <BackButton style={styles.backButton} />
 
-      <Text style={styles.title}>{results.genonames[0].countryName}</Text>
+      <Text style={styles.title}>{results.geonames[0].countryName}</Text>
 
       <View style={styles.citiesView}>
         <ScrollView>

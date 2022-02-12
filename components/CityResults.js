@@ -2,13 +2,11 @@ import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity } from 'react-native';
 import BackButton from './BackButton';
 import { useRecoilValue } from 'recoil';
-import { resultState } from '../atoms/SearchType';
+import { resultCityState } from '../atoms/atoms';
 
 export default function CityResults() {
   
-  const results = useRecoilValue(resultState)
-  console.log("CITY");
-  // console.log(results.geonames[0]);
+  const results = useRecoilValue(resultCityState)
 
   return (
     <View style={styles.screen}>

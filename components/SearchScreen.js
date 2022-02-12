@@ -20,13 +20,14 @@ export default function SearchScreen() {
   const buttonClickedHandler = () => {
     axios.get(`http://api.geonames.org/searchJSON?name_equals=ume%C3%A5&username=weknowit&maxRows=1`)
     .then((response) => {
-      // console.log(response.data); 
       setResults(response.data);
+      console.log("TYPE");
       console.log(searchType);
       if (searchType === "city") {
         navigation.push("CityResults");
-      } else if (searchType === "country") {}
+      } else if (searchType === "country") {
         navigation.push("CountryResults");
+      }
     })
     .catch(error => {
       console.log(error);

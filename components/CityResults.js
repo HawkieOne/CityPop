@@ -32,28 +32,33 @@ export default function CityResults() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#2E3440',
+    backgroundColor: '#FCFCFC',
     alignItems: 'center',
   },
   title: {
     fontWeight: 'bold',
     fontSize: 32,
     marginTop: 'auto',
-    marginBottom: 'auto',
   },
   populationView: {
-    padding: 50,
-    borderWidth: 1,
-    borderColor: '#A3BE8C',
+    alignSelf: 'stretch',
+    height: '30%',
+    borderWidth: 2,
+    borderColor: '#39B77C',
     borderRadius: '15px',
-    marginBottom: 'auto',
-    alignItems: 'center',
-    justifyContent: 'center'
+    marginVertical: 'auto',
+    marginHorizontal: 40,
+    paddingTop: 20,
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   populationText: {
-    fontSize: 24,
+    fontSize: 16,
+    color: '#9CA38F',
   },
-  populationTextNumber: {
-    fontSize: 18,
+  populationNumber: {
+    fontWeight: 'bold',
+    fontSize: 32,
+    marginVertical: 'auto'
   }
 });

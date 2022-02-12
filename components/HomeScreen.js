@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { searchTypeState } from '../atoms/SearchType';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import FlagIcon from 'react-native-vector-icons/entypo';
 
 export default function App() {
     
@@ -12,26 +14,28 @@ export default function App() {
     <View style={styles.container}>
         <Text style={styles.title}>CityPop</Text>
           <View style={styles.btnView}>
-                <Button 
-                title="SEARCH BY CITY" 
-                style={styles.btn} 
-                color="#B48EAD" 
+                <TouchableOpacity 
+                style={[styles.btn, styles.cityButton]} 
                 onPress={() => {
                   setType("city");
                   navigation.push("SearchScreen");                    
                 }} 
                 accessibilityLabel="Search by city name"
-                />
-                <Button 
-                title="SEARCH BY COUNTRY" 
-                style={styles.btn} 
-                color="#5E81AC" 
+                >
+                  <Icon name="city" size={20} style={styles.icon} />
+                  <Text style={styles.btnText}>SEARCH BY CITY</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                style={[styles.btn, styles.countryButton]} 
                 onPress={() => {
                     setType("country");
                     navigation.push("SearchScreen");
                 }}
                 accessibilityLabel="Search by country name"
-                />
+                >
+                  <FlagIcon name="sweden" size={20} style={styles.icon} />
+                  <Text style={styles.btnText}>SEARCH BY COUNTRY</Text>
+                </TouchableOpacity>
             </View>
       </View>
   );
@@ -40,22 +44,39 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2E3440',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    backgroundColor: '#FCFCFC',
+    justifyContent: 'space-around',   
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 32,
+    fontSize: 40,
     marginTop: 'auto',
+    color: '#484848',
+    textAlign: 'center'
   },
   btnView: {
     marginTop: 'auto',
     marginBottom: 'auto',
   },
   btn: {
-    backgroundColor: '#4C566A',
-    color: '#5E81AC',
-    marginTop: '10%',
+    flexDirection: 'row',
+    alignItems: "center",
+    padding: 10,
+    marginHorizontal: 10,
+    borderRadius: 15,
+    backgroundColor: '#39B77C'
+  },
+  icon: {
+    color: '#484848',
+  },
+  btnText: {
+    marginLeft: 10,
+    color: '#FCFCFC',
+  },
+  cityButton: {
+    
+  },
+  countryButton: {
+    marginTop: 10,
   }
 });

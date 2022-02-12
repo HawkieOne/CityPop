@@ -13,23 +13,33 @@ export default function BackButton() {
 
   return (
     <View style={styles.backButtonView}>
-        <TouchableOpacity onPress={buttonClickedHandler}>
-        <Icon name="arrow-left" size={30} color="#D08770" style={styles.backIcon} />
+        <TouchableOpacity onPress={buttonClickedHandler} style={styles.backButton}>
+          <Icon name="arrow-left" size={20} style={styles.backIcon} />
+          <Text style={styles.backText}>CityPop</Text>
         </TouchableOpacity>
-        <Text>CityPop</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-    backButtonView: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginTop: '10%',
-      marginLeft: '10%',
+    backButtonView: {      
+      marginTop: 10,
+      marginLeft: 10,
       marginRight: 'auto',
     },
-    backIcon: {
-      marginRight: '5%',
+    backButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      padding: 5,
+      borderWidth: 1,
+      borderColor: '#D08770',
+      borderRadius: 25
     },
+    backIcon: {
+      marginRight: 10,
+      color: '#D08770'
+    },
+    backText: {
+      fontSize: 14
+    }
   });

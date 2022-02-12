@@ -46,12 +46,12 @@ export default function SearchScreen() {
             style={styles.input}
             onChangeText={onChangeText}
             value={text}
-            placeholder="useless placeholder"
+            placeholder={'Enter a ' + searchType}
           />
           <TouchableOpacity
             onPress={buttonClickedHandler}
             style={styles.roundButton1}>
-              <Icon name="search" size={30} color="#D08770" style={styles.backIcon} />
+              <Icon name="search" size={30} style={styles.icon} />
           </TouchableOpacity>
         </View> 
 
@@ -61,18 +61,17 @@ export default function SearchScreen() {
 
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#2E3440',
+    backgroundColor: '#FCFCFC',
     flex: 1,
     justifyContent: 'space-around',
-    alignItems: 'center',
   },
   title: {
     fontWeight: 'bold',
     fontSize: 32,
     marginTop: 'auto',
+    textAlign: 'center'
   },
   searchView: {
-    alignItems: 'center',
     marginTop: 'auto',
     marginBottom: 'auto',
   },
@@ -81,14 +80,18 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    borderWidth: 1,
+    borderColor: '#39B77C',
+    textAlign: 'center'
   },
   roundButton1: {
-    width: 80,
-    height: 80,
+    alignSelf: 'center',
+    width: 60,
+    height: 60,
+    backgroundColor: '#39B77C',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
     borderRadius: 100,
-    borderWidth: 1,
   },
 });

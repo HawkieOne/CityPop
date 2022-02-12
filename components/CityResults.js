@@ -6,21 +6,21 @@ import { resultCityState } from '../atoms/atoms';
 
 export default function CityResults() {
   
-  const results = useRecoilValue(resultCityState)
+  const city = useRecoilValue(resultCityState)
 
   return (
     <View style={styles.screen}>
 
         <BackButton />
 
-        <Text style={styles.title}>{results.geonames[0].toponymName}</Text>
+        <Text style={styles.title}>{city.toponymName}</Text>
 
         <View style={styles.populationView}>
           <Text style={styles.populationText}>
             Population
           </Text>
           <Text style={styles.populationNumber}>
-            {results.geonames[0].population}
+            {city.population}
           </Text>
         </View>
     </View>

@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
+const { getCode } = require('country-list');
 
 export default function SearchScreen() {
 
@@ -22,14 +23,15 @@ export default function SearchScreen() {
     if (searchType === 'city') {
       axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
       .then((response) => {
-        setCityResults(response.data);
+        setCityResults(response.data.geonames[0]);
         navigation.push("CityResults");
       })
       .catch(error => {
         console.log(error);
       });
     } else if (searchType === 'country') {
-      axios.get(`http://api.geonames.org/searchJSON?q=${text}&cities=cities1000&orderby=population&username=weknowit&maxRows=10`)
+      const countryCode = getCode(text);
+      axios.get(`http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=10`)
       .then((response) => {
         setCountryResults(response.data);
         navigation.push("CountryResults");

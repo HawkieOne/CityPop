@@ -8,7 +8,7 @@ export default function BackButton() {
     const navigation = useNavigation();
 
     const buttonClickedHandler = () => {
-        navigation.push("Home");
+        navigation.goBack();
     };
 
   return (

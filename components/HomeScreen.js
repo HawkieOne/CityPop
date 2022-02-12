@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useRecoilState } from 'recoil';
-import { searchTypeState } from '../atoms/SearchType';
+import { searchTypeState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FlagIcon from 'react-native-vector-icons/entypo';

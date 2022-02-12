@@ -18,7 +18,7 @@ export default function SearchScreen() {
   const [text, onChangeText] = React.useState("");
 
   const buttonClickedHandler = () => {
-    axios.get(`http://api.geonames.org/searchJSON?name_equals=ume%C3%A5&username=weknowit&maxRows=1`)
+    axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
     .then((response) => {
       setResults(response.data);
       console.log("TYPE");

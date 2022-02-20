@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { SearchContext } from "../shared/contexts";
-import { StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from './BackButton';
 import axios from 'axios';
@@ -18,23 +18,27 @@ export default function SearchScreen() {
   const [countryResults, setCountryResults] = useRecoilState(resultCountryState);
   const [visible, setVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
   const [text, onChangeText] = React.useState("");
 
   const buttonClickedHandler = () => {
+    setShowLoadingIndicator(true);
     if (searchType === 'city') {
       axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
       .then((response) => {
-        if (response.status !== "OK") {
-          showErrorMessage("The server have a bad answer");
+        console.log(response);
+        setShowLoadingIndicator(false);        
+        if (response.status !== 200) {
+          showErrorMessage("The server have a bad answer");          
           return;
         }
-        if (response.data.totalResultsCount === 0) {
+        if (response.data.totalResultsCount === 0) {          
           showErrorMessage("The city was not found");
           return;
-        }
+        }        
         setCityResults(response.data.geonames[0]);
-        navigation.push("CityResults");
+        navigation.push("CityResults");        
       })
       .catch(error => {
         console.log(error);
@@ -43,7 +47,8 @@ export default function SearchScreen() {
       const countryCode = getCode(text);
       axios.get(`http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=10`)
       .then((response) => {
-        if (response.status !== "OK") {
+        setShowLoadingIndicator(false);
+        if (response.status !== 200) {
           showErrorMessage("The server have a bad answer");
           return;
         }
@@ -65,11 +70,6 @@ export default function SearchScreen() {
     setVisible(true);
   }
 
-  const onDismissSnackBar = () => {
-    setErrorMessage("");
-    setVisible(false);
-  }
-
   return (
     <View style={styles.screen}>
 
@@ -84,14 +84,17 @@ export default function SearchScreen() {
             value={text}
             placeholder={'Enter a ' + searchType}
           />
+          
           <TouchableOpacity
             onPress={buttonClickedHandler}
             style={styles.roundButton1}>
               <Icon name="search" size={30} style={styles.icon} />
           </TouchableOpacity>
+
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
         </View> 
 
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
+        <ActivityIndicator  styles={styles.loadingIndicator} size="large" color="black" animating={showLoadingIndicator} />        
 
     </View>
   )
@@ -134,5 +137,8 @@ const styles = StyleSheet.create({
   errorMessage: {
     height: "20px",
     color: "red",
+  },
+  loadingIndicator: {
+    marginBottom: 'auto',
   }
 });

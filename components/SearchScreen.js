@@ -8,7 +8,6 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 const { getCode } = require('country-list');
-import { Snackbar } from 'react-native-paper';
 
 export default function SearchScreen() {
 

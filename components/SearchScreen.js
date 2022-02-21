@@ -31,7 +31,7 @@ export default function SearchScreen() {
     }
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
-      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&username=weknowit&maxRows=1`;
+      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&featureClass=P&username=weknowit&maxRows=1`;
       axios.get(apiURL)
       .then((response) => {
         handleCitySearchResponse(response);

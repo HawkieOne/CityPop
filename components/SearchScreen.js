@@ -56,7 +56,7 @@ export default function SearchScreen() {
           showErrorMessage("The country was not found");
           return;
         }
-        setCityResults(response.data.geonames[0]);
+        setCountryResults(response.data);
         navigation.push("CountryResults");
       })
       .catch(error => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from '../components/BackButton';
@@ -169,10 +169,6 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <KeyboardAvoidingView 
-        style={styles.keyboardAvoidingView} 
-        behavior={'padding'}
-      >
 
         <BackButton />
 
@@ -214,7 +210,6 @@ export default function SearchScreen() {
             <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
           </View>
         </View>
-      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

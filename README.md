@@ -20,7 +20,7 @@
 </div>
 <br/>
 
-CityPop is an application which gives the user to search for the population of cities around the world. This can be done in two ways:
+CityPop is an application in which the user can search for the population of cities around the world. This can be done in two ways:
 * You can search for the city with the city name
 * You can also search for a country. If you search for a country the 20 biggest cities in the country will be displayed. Then you can click on a city to see its
   population.

@@ -87,38 +87,40 @@ export default function SearchScreen() {
 
         <BackButton />
 
-        <Text style={styles.title}>SEARCH BY {searchType.toUpperCase()}</Text>
+        <View style={styles.mainView}>
+          <Text style={styles.title}>SEARCH BY {searchType.toUpperCase()}</Text>
 
-        <View style={styles.searchView}>
+          <View style={styles.searchView}>
 
-           {/* 
-            * Only visible when error message is not null 
-           */}
-          <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
+            {/* 
+              * Only visible when error message is not null 
+            */}
+            <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
 
-          <View style={[styles.inputArea, errorMessage && styles.outlineRed]}>
-            <TextInput
-              // * styles.inputFocus is active when the input has focus
-              style={inputFocused ? styles.inputFocus : styles.input}
-              onChangeText={onChangeText}
-              onFocus={() => setInputFocused(true)}
-              onBlur={() => setInputFocused(false)}
-              value={text}
-              placeholder={'Enter a ' + searchType}
-              // autoFocus={true}
-              returnKeyType="search"
-            />
+            <View style={[styles.inputArea, errorMessage && styles.outlineRed]}>
+              <TextInput
+                // * styles.inputFocus is active when the input has focus
+                style={inputFocused ? styles.inputFocus : styles.input}
+                onChangeText={onChangeText}
+                onFocus={() => setInputFocused(true)}
+                onBlur={() => setInputFocused(false)}
+                value={text}
+                placeholder={'Enter a ' + searchType}
+                // autoFocus={true}
+                returnKeyType="search"
+              />
+            </View>
+            
+            <TouchableOpacity
+              onPress={searchButtonClickedHandler}
+              style={styles.searchButton}>
+                <Icon name="search" size={30} style={styles.icon} />
+            </TouchableOpacity>          
+          </View> 
+
+          <View style={styles.loadingIndicator}>
+            <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
           </View>
-          
-          <TouchableOpacity
-            onPress={searchButtonClickedHandler}
-            style={styles.searchButton}>
-              <Icon name="search" size={30} style={styles.icon} />
-          </TouchableOpacity>          
-        </View> 
-
-        <View style={styles.loadingIndicator}>
-          <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
         </View>
 
     </SafeAreaView>
@@ -129,7 +131,10 @@ const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#FCFCFC',
     flex: 1,
-    // justifyContent: 'space-around',
+    marginTop: 20,
+  },
+  mainView: {
+    flex: 1,
   },
   title: {
     fontWeight: 'bold',

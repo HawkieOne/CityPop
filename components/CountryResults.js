@@ -29,6 +29,9 @@ export default function CountryResults() {
       flex: 1,
       justifyContent: 'space-around',
     },
+    mainView: {
+      flex: 1,
+    },
     title: {
       fontWeight: 'bold',
       fontSize: 32,
@@ -66,25 +69,27 @@ export default function CountryResults() {
 
       <BackButton />
 
-      <Text style={styles.title}>{results.geonames[0].countryName}</Text>
+      <View style={styles.mainView}>
+        <Text style={styles.title}>{results.geonames[0].countryName}</Text>
 
-      <View style={styles.citiesView}>
-        <ScrollView
-          alwaysBounceVertical={true}
-        >
-            {results.geonames.map((city, index) => (
-              <TouchableOpacity
-                key={city.geonameId}
-                /**
-                * TODO: The text for every city could be in its own component
-                */
-                onPress={() => onCityClickHandler(city)}
-                style={styles.cityTextView}
-              >
-                 <Text style={styles.cityText}>{city.name}</Text>
-              </TouchableOpacity>   
-            ))}
-          </ScrollView>   
+        <View style={styles.citiesView}>
+          <ScrollView
+            alwaysBounceVertical={true}
+          >
+              {results.geonames.map((city, index) => (
+                <TouchableOpacity
+                  key={city.geonameId}
+                  /**
+                  * TODO: The text for every city could be in its own component
+                  */
+                  onPress={() => onCityClickHandler(city)}
+                  style={styles.cityTextView}
+                >
+                  <Text style={styles.cityText}>{city.name}</Text>
+                </TouchableOpacity>   
+              ))}
+            </ScrollView>   
+        </View>
       </View>
           
     </SafeAreaView>

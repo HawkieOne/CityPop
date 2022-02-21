@@ -10,7 +10,7 @@ export default function CityResults() {
   
   const insets = useSafeAreaInsets();
   const city = useRecoilValue(resultCityState);
-  
+
   const styles = StyleSheet.create({
     screen: {
       paddingTop: insets.top,
@@ -18,7 +18,12 @@ export default function CityResults() {
       flex: 1,
       backgroundColor: '#FCFCFC',
       alignItems: 'center',
-      justifyContent: 'space-around',
+    },
+    mainView: {
+      flex: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     title: {
       fontWeight: 'bold',
@@ -26,15 +31,15 @@ export default function CityResults() {
       marginTop: 'auto',
     },
     populationView: {
-      alignSelf: 'stretch',
-      height: 100,
       borderWidth: 2,
       borderColor: '#39B77C',
       borderRadius: 15,
       marginTop: 20,
       marginBottom: 'auto',
       marginHorizontal: 40,
-      paddingTop: 20,
+      paddingTop: 30,
+      paddingBottom: 30,
+      paddingHorizontal: 80,
       flexDirection: 'column',
       alignItems: 'center'
     },
@@ -54,15 +59,18 @@ export default function CityResults() {
 
         <BackButton />
 
-        <Text style={styles.title}>{city.toponymName}</Text>
+        <View style={styles.mainView}>
+          <Text style={styles.title}>{city.toponymName}</Text>
 
-        <View style={styles.populationView}>
-          <Text style={styles.populationText}>
-            Population
-          </Text>
-          <Text style={styles.populationNumber}>
-            {city.population}
-          </Text>
+          <View style={styles.populationView}>
+            <Text style={styles.populationText}>
+              Population
+            </Text>
+            <Text style={styles.populationNumber}>
+              {city.population}
+            </Text>
+          </View>
+
         </View>
     </SafeAreaView>
   )

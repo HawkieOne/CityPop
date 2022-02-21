@@ -8,9 +8,11 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 const { getCode } = require('country-list');
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SearchScreen() {
 
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
 
   const searchType = useRecoilValue(searchTypeState);
@@ -82,6 +84,77 @@ export default function SearchScreen() {
     setErrorMessage(message);
   }
 
+  const styles = StyleSheet.create({
+    screen: {
+      paddingTop: insets.top,
+      paddingBottom: insets.bottom,
+      backgroundColor: '#FCFCFC',
+      flex: 1,
+    },
+    mainView: {
+      flex: 1,
+    },
+    title: {
+      fontWeight: 'bold',
+      fontSize: 32,
+      marginTop: 'auto',
+      textAlign: 'center'
+    },
+    searchView: {
+      marginTop: 'auto',
+      marginBottom: 'auto',
+    },
+    inputArea: {
+      borderBottomWidth: 1,
+      borderBottomColor: '#39B77C',
+      margin: 12,
+    },
+    input: {
+      height: 40,    
+      padding: 10,
+      textAlign: 'left',
+    },
+    inputFocus: {
+      height: 40,    
+      padding: 10,
+      textAlign: 'left',
+      // outlineColor: '#39B77C',
+      // outlineWidth: 1,
+    },
+    searchButton: {
+      alignSelf: 'center',
+      width: 60,
+      height: 60,
+      backgroundColor: '#39B77C',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 10,
+      borderRadius: 100,
+    },
+    errorMessage: {
+      height: 50,
+      color: 'white',
+      marginHorizontal: 12,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+    },
+    errorMessageActive: {
+      backgroundColor: '#BF616A',
+    },
+    loadingIndicator: {
+      marginBottom: 100,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    outlineRed: {
+      borderBottomWidth: 2,
+      borderBottomColor: '#BF616A',
+    }
+  });
+
   return (
     <SafeAreaView style={styles.screen}>
 
@@ -126,73 +199,3 @@ export default function SearchScreen() {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  screen: {
-    backgroundColor: '#FCFCFC',
-    flex: 1,
-    marginTop: 20,
-  },
-  mainView: {
-    flex: 1,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 32,
-    marginTop: 'auto',
-    textAlign: 'center'
-  },
-  searchView: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  },
-  inputArea: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#39B77C',
-    margin: 12,
-  },
-  input: {
-    height: 40,    
-    padding: 10,
-    textAlign: 'left',
-  },
-  inputFocus: {
-    height: 40,    
-    padding: 10,
-    textAlign: 'left',
-    // outlineColor: '#39B77C',
-    // outlineWidth: 1,
-  },
-  searchButton: {
-    alignSelf: 'center',
-    width: 60,
-    height: 60,
-    backgroundColor: '#39B77C',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 100,
-  },
-  errorMessage: {
-    height: 50,
-    color: 'white',
-    marginHorizontal: 12,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 5,
-  },
-  errorMessageActive: {
-    backgroundColor: '#BF616A',
-  },
-  loadingIndicator: {
-    marginBottom: 100,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  outlineRed: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#BF616A',
-  }
-});

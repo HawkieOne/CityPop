@@ -103,7 +103,7 @@ export default function SearchScreen() {
     },
     title: {
       fontWeight: 'bold',
-      fontSize: 32,
+      fontSize: 26,
       marginTop: 'auto',
       textAlign: 'center'
     },
@@ -167,7 +167,7 @@ export default function SearchScreen() {
     <SafeAreaView style={styles.screen}>
       <KeyboardAvoidingView 
         style={styles.keyboardAvoidingView} 
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={'padding'}
       >
 
         <BackButton />

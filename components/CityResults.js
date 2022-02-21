@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
 import BackButton from './BackButton';
 import { useRecoilValue } from 'recoil';
 import { resultCityState } from '../atoms/atoms';

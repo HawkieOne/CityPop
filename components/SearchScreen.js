@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { SearchContext } from "../shared/contexts";
-import { StyleSheet, Text, View, Button, BackHandler, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from './BackButton';
 import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 const { getCode } = require('country-list');
@@ -14,9 +13,8 @@ export default function SearchScreen() {
   const navigation = useNavigation();
 
   const searchType = useRecoilValue(searchTypeState);
-  const [cityResults, setCityResults] = useRecoilState(resultCityState);
-  const [countryResults, setCountryResults] = useRecoilState(resultCountryState);
-  const [visible, setVisible] = useState(false);
+  const setCityResults = useSetRecoilState(resultCityState);
+  const setCountryResults = useSetRecoilState(resultCountryState);
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
@@ -68,7 +66,6 @@ export default function SearchScreen() {
 
   const showErrorMessage = (message) => {
     setErrorMessage(message);
-    setVisible(true);
   }
 
   return (
@@ -80,10 +77,12 @@ export default function SearchScreen() {
 
         <View style={styles.searchView}>
 
+          // Only visible when error message is not null
           <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
 
           <View style={styles.inputArea}>
             <TextInput
+              // * styles.inputFocus is active when the input has focus
               style={inputFocused ? styles.inputFocus : styles.input}
               onChangeText={onChangeText}
               onFocus={() => setInputFocused(true)}

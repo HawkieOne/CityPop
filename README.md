@@ -26,6 +26,7 @@ CityPop is an application in which the user can search for the population of cit
   population.
   
 From every screen except for the home screen you can return back to an earlier screen by pressing the back button in the top left corner.
+Every time a search is done the results are fetched dynamically from the API GeoNames.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -39,6 +40,8 @@ From every screen except for the home screen you can return back to an earlier s
 * [Country List](https://www.npmjs.com/package/country-list) - Used for converting countries to their country codes
 * [React Navigation](https://reactnavigation.org/) - Used for navigating between pages in React Native
 * [Recoil](https://recoiljs.org/) - Used for managing states between pages in React Native
+* [GeoNames API](http://www.geonames.org/) - API with over eleven million placenames around the world
+ 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

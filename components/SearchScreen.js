@@ -46,7 +46,7 @@ export default function SearchScreen() {
       });
     } else if (searchType === 'country') {
       const countryCode = getCode(text);
-      axios.get(`http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=10`)
+      axios.get(`http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`)
       .then((response) => {
         setShowLoadingIndicator(false);
         if (response.status !== 200) {

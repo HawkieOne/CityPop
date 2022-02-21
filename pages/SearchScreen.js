@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import BackButton from './BackButton';
+import BackButton from '../components/BackButton';
 import axios from 'axios';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';

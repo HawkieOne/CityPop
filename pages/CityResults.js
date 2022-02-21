@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BackButton from './BackButton';
+import BackButton from '../components/BackButton';
 import { useRecoilValue } from 'recoil';
 import { resultCityState } from '../atoms/atoms';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

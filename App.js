@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from './components/HomeScreen';
-import SearchScreen from './components/SearchScreen';
-import CityResults from './components/CityResults';
-import CountryResults from './components/CountryResults';
+import HomeScreen from './pages/HomeScreen';
+import SearchScreen from './pages/SearchScreen';
+import CityResults from './pages/CityResults';
+import CountryResults from './pages/CountryResults';
 import React from 'react';
 import { RecoilRoot } from 'recoil';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

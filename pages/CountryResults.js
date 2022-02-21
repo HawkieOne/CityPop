@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BackButton from './BackButton';
+import BackButton from '../components/BackButton';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { resultCityState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';

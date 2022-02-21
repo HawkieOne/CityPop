@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
     backButtonView: {      
       marginTop: 10,
       marginLeft: 10,
-      marginRight: 'auto',
-      shadowColor: "#000",
+      marginRight: 'auto',      
     },
     backButton: {
       flexDirection: 'row',
@@ -35,13 +34,6 @@ const styles = StyleSheet.create({
       // borderWidth: 1,
       // borderColor: '#D08770',
       borderRadius: 5,
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
     },
     backIcon: {
       marginRight: 10,

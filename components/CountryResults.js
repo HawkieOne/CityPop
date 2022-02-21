@@ -31,15 +31,16 @@ export default function CountryResults() {
     },
     mainView: {
       flex: 1,
+      marginTop: 10
     },
     title: {
       fontWeight: 'bold',
       fontSize: 32,
       marginTop: 'auto',
       textAlign: 'center',
+      marginBottom: 20,
     },
     citiesView: {
-      paddingVertical: 15,
       marginHorizontal: 40,
       marginTop: 'auto',
       marginBottom: 'auto',
@@ -51,14 +52,6 @@ export default function CountryResults() {
       paddingHorizontal: 10,
       paddingVertical: 5,
       marginVertical: 10,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
     },
     cityText: {
       fontSize: 20,

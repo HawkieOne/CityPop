@@ -26,7 +26,7 @@ export default function SearchScreen() {
 
   const searchButtonClickedHandler = () => {
     if(text === "") {
-      showErrorMessage("Please enter a " + searchType + " search term");
+      showErrorMessage("Please e  nter a " + searchType + " search term");
       return;
     }
     setShowLoadingIndicator(true);
@@ -135,14 +135,15 @@ export default function SearchScreen() {
       padding: 10,
       borderRadius: 100,
     },
-    errorMessage: {
-      height: 50,
-      color: 'white',
-      marginHorizontal: 12,
-      display: 'flex',
+    errorView: {
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 5,
+      borderRadius: 10,
+      height: 50,
+      marginHorizontal: 12,
+    },
+    errorMessage: {
+      color: 'white',      
     },
     errorMessageActive: {
       backgroundColor: '#BF616A',
@@ -172,7 +173,11 @@ export default function SearchScreen() {
             {/* 
               * Only visible when error message is not null 
             */}
-            <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
+            <View style={[styles.errorView, errorMessage && styles.errorMessageActive]}>
+              <Text style={styles.errorMessage}>
+                {errorMessage}
+              </Text>
+            </View>
 
             <View style={[styles.inputArea, errorMessage && styles.outlineRed]}>
               <TextInput

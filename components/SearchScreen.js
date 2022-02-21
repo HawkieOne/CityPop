@@ -90,7 +90,7 @@ export default function SearchScreen() {
               onBlur={() => setInputFocused(false)}
               value={text}
               placeholder={'Enter a ' + searchType}
-              // autoFocus={true}
+              autoFocus={true}
               returnKeyType="search"
             />
           </View>
@@ -133,16 +133,14 @@ const styles = StyleSheet.create({
   input: {
     height: 40,    
     padding: 10,
-    // borderWidth: 1,
-    // borderColor: '#000000',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   inputFocus: {
     height: 40,    
     padding: 10,
     borderWidth: 1,
     borderColor: 'red',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   roundButton1: {
     alignSelf: 'center',
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   errorMessageActive: {
-    backgroundColor: '#e77c02',
+    backgroundColor: '#BF616A',
   },
   loadingIndicator: {
     marginBottom: '100px',

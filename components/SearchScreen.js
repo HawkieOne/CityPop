@@ -21,48 +21,61 @@ export default function SearchScreen() {
   const [text, onChangeText] = useState("");
   const [inputFocused, setInputFocused] = useState(false);
 
-  const buttonClickedHandler = () => {
+  const searchButtonClickedHandler = () => {
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
-      axios.get(`http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`)
+      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`;
+      axios.get(apiURL)
       .then((response) => {
-        console.log(response);
-        setShowLoadingIndicator(false);        
-        if (response.status !== 200) {
-          showErrorMessage("The server have a bad answer");          
-          return;
-        }
-        if (response.data.totalResultsCount === 0) {          
-          showErrorMessage("The city was not found");
-          return;
-        }        
-        setCityResults(response.data.geonames[0]);
-        navigation.push("CityResults");        
+        handleCitySearchResponse(response);
       })
       .catch(error => {
         console.log(error);
       });
     } else if (searchType === 'country') {
       const countryCode = getCode(text);
-      axios.get(`http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`)
+      const apiURL = `http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`;
+      axios.get(apiURL)
       .then((response) => {
-        setShowLoadingIndicator(false);
-        if (response.status !== 200) {
-          showErrorMessage("The server have a bad answer");          
-          return;
-        }
-        if (response.data.totalResultsCount === 0) {
-          showErrorMessage("The country was not found");
-          return;
-        }
-        setCountryResults(response.data);
-        navigation.push("CountryResults");
+        handleCountrySearchResponse(response);
       })
       .catch(error => {
         console.log(error);
       });
     }
   };
+
+  const handleCitySearchResponse = (response) => {
+    setShowLoadingIndicator(false);        
+    if (response.status !== 200) {
+      showErrorMessage("The API could not be reached.");          
+      return;
+    }
+    if (response.data.totalResultsCount === 0) {          
+      showErrorMessage("The city was not found.");
+      return;
+    }     
+    // To ensure that the error message is gone if the user returns to this screen    
+    setErrorMessage(null);
+    setCityResults(response.data.geonames[0]);
+    navigation.push("CityResults");  
+  }
+
+  const handleCountrySearchResponse = (response) => {
+    setShowLoadingIndicator(false);
+    if (response.status !== 200) {
+      showErrorMessage("The API could not be reached.");          
+      return;
+    }
+    if (response.data.totalResultsCount === 0) {
+      showErrorMessage("The country was not found.");
+      return;
+    }
+    // To ensure that the error message is gone if the user returns to this screen   
+    setErrorMessage(null);
+    setCountryResults(response.data);
+    navigation.push("CountryResults");
+  }
 
   const showErrorMessage = (message) => {
     setErrorMessage(message);
@@ -77,7 +90,9 @@ export default function SearchScreen() {
 
         <View style={styles.searchView}>
 
-          // Only visible when error message is not null
+           {/* 
+            * Only visible when error message is not null 
+           */}
           <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
 
           <View style={styles.inputArea}>
@@ -95,7 +110,7 @@ export default function SearchScreen() {
           </View>
           
           <TouchableOpacity
-            onPress={buttonClickedHandler}
+            onPress={searchButtonClickedHandler}
             style={styles.roundButton1}>
               <Icon name="search" size={30} style={styles.icon} />
           </TouchableOpacity>          

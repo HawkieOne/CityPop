@@ -99,6 +99,12 @@ The app is far from perfect and has its flaws. The known ones are listed below.
 - On Android a notification at the bottom of the screen is shown. This is due to a bug in Recoil and is not something that I could fix. I could have avoided 
   using Recoil but I discovered the bug too late in the development of the app for this to be a viable option.
   
+<!-- TESTED DEVICES -->
+## Tested devices
+
+* Xiaomi Mi 9 running Android
+* Expo through Chrome dev tools with dimenesion iPhone SE
+  
   
 <p align="right">(<a href="#top">back to top</a>)</p>
 

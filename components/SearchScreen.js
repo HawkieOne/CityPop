@@ -20,7 +20,8 @@ export default function SearchScreen() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
-  const [text, onChangeText] = React.useState("");
+  const [text, onChangeText] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
 
   const buttonClickedHandler = () => {
     setShowLoadingIndicator(true);
@@ -49,7 +50,7 @@ export default function SearchScreen() {
       .then((response) => {
         setShowLoadingIndicator(false);
         if (response.status !== 200) {
-          showErrorMessage("The server have a bad answer");
+          showErrorMessage("The server have a bad answer");          
           return;
         }
         if (response.data.totalResultsCount === 0) {
@@ -81,12 +82,18 @@ export default function SearchScreen() {
 
           <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
 
-          <TextInput
-            style={styles.input}
-            onChangeText={onChangeText}
-            value={text}
-            placeholder={'Enter a ' + searchType}
-          />
+          <View style={styles.inputArea}>
+            <TextInput
+              style={inputFocused ? styles.inputFocus : styles.input}
+              onChangeText={onChangeText}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
+              value={text}
+              placeholder={'Enter a ' + searchType}
+              // autoFocus={true}
+              returnKeyType="search"
+            />
+          </View>
           
           <TouchableOpacity
             onPress={buttonClickedHandler}
@@ -118,13 +125,23 @@ const styles = StyleSheet.create({
   searchView: {
     marginVertical: 'auto',
   },
-  input: {
-    height: 40,
+  inputArea: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#39B77C',
     margin: 12,
-    borderWidth: 1,
+  },
+  input: {
+    height: 40,    
+    padding: 10,
+    // borderWidth: 1,
+    // borderColor: '#000000',
+    textAlign: 'center',
+  },
+  inputFocus: {
+    height: 40,    
     padding: 10,
     borderWidth: 1,
-    borderColor: '#39B77C',
+    borderColor: 'red',
     textAlign: 'center',
   },
   roundButton1: {
@@ -144,6 +161,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    borderRadius: 5,
   },
   errorMessageActive: {
     backgroundColor: '#e77c02',

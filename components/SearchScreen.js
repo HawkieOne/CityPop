@@ -25,6 +25,7 @@ export default function SearchScreen() {
   const [inputFocused, setInputFocused] = useState(false);
 
   const searchButtonClickedHandler = () => {
+    // If the user has not entered a search term
     if(text === "") {
       showErrorMessage("Please enter a " + searchType + " search term");
       return;
@@ -40,6 +41,7 @@ export default function SearchScreen() {
         console.log(error);
       });
     } else if (searchType === 'country') {
+      // Converts the country name to respective country code 
       const countryCode = getCode(text);
       const apiURL = `http://api.geonames.org/searchJSON?q=${text.trim()}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`;
       axios.get(apiURL)
@@ -58,6 +60,7 @@ export default function SearchScreen() {
       showErrorMessage("The API could not be reached.");          
       return;
     }
+    // If the api return zero results
     if (response.data.totalResultsCount === 0) {          
       showErrorMessage("The city was not found.");
       return;
@@ -74,6 +77,7 @@ export default function SearchScreen() {
       showErrorMessage("The API could not be reached.");          
       return;
     }
+    // If the api return zero results
     if (response.data.totalResultsCount === 0) {
       showErrorMessage("The country was not found.");
       return;

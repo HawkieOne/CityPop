@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSetRecoilState } from 'recoil';
 import { searchTypeState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
@@ -7,7 +8,7 @@ import FlagIcon from 'react-native-vector-icons/Entypo';
 
 export default function App() {
     
-  const setType = useSetRecoilState(searchTypeState)
+  const setSearchType = useSetRecoilState(searchTypeState)
   const navigation = useNavigation();
 
   return (
@@ -18,7 +19,7 @@ export default function App() {
                 <TouchableOpacity 
                   style={[styles.btn, styles.cityButton]} 
                   onPress={() => {
-                    setType("city");
+                    setSearchType("city");                    
                     navigation.push("SearchScreen");                    
                   }} 
                   accessibilityLabel="Search by city name"
@@ -30,7 +31,7 @@ export default function App() {
                 <TouchableOpacity 
                   style={[styles.btn, styles.countryButton]} 
                   onPress={() => {
-                      setType("country");
+                      setSearchType("country");
                       navigation.push("SearchScreen");
                   }}
                   accessibilityLabel="Search by country name"
@@ -38,7 +39,7 @@ export default function App() {
                   <FlagIcon name="sweden" size={20} style={styles.icon} />
                   <Text style={styles.btnText}>SEARCH BY COUNTRY</Text>
                 </TouchableOpacity>
-                
+
             </View>
       </SafeAreaView>
   );

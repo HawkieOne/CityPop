@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from './BackButton';
 import axios from 'axios';
@@ -82,7 +83,7 @@ export default function SearchScreen() {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
 
         <BackButton />
 
@@ -95,7 +96,7 @@ export default function SearchScreen() {
            */}
           <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
 
-          <View style={styles.inputArea}>
+          <View style={[styles.inputArea, errorMessage && styles.outlineRed]}>
             <TextInput
               // * styles.inputFocus is active when the input has focus
               style={inputFocused ? styles.inputFocus : styles.input}
@@ -104,14 +105,14 @@ export default function SearchScreen() {
               onBlur={() => setInputFocused(false)}
               value={text}
               placeholder={'Enter a ' + searchType}
-              autoFocus={true}
+              // autoFocus={true}
               returnKeyType="search"
             />
           </View>
           
           <TouchableOpacity
             onPress={searchButtonClickedHandler}
-            style={styles.roundButton1}>
+            style={styles.searchButton}>
               <Icon name="search" size={30} style={styles.icon} />
           </TouchableOpacity>          
         </View> 
@@ -120,7 +121,7 @@ export default function SearchScreen() {
           <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
         </View>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#FCFCFC',
     flex: 1,
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
   },
   title: {
     fontWeight: 'bold',
@@ -137,7 +138,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   searchView: {
-    marginVertical: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
   },
   inputArea: {
     borderBottomWidth: 1,
@@ -152,11 +154,11 @@ const styles = StyleSheet.create({
   inputFocus: {
     height: 40,    
     padding: 10,
-    borderWidth: 1,
-    borderColor: 'red',
     textAlign: 'left',
+    // outlineColor: '#39B77C',
+    // outlineWidth: 1,
   },
-  roundButton1: {
+  searchButton: {
     alignSelf: 'center',
     width: 60,
     height: 60,
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   errorMessage: {
-    height: 30,
+    height: 50,
     color: 'white',
     marginHorizontal: 12,
     display: 'flex',
@@ -179,9 +181,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#BF616A',
   },
   loadingIndicator: {
-    marginBottom: '100px',
+    marginBottom: 100,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  outlineRed: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#BF616A',
   }
 });

@@ -26,14 +26,22 @@ const styles = StyleSheet.create({
       marginTop: 10,
       marginLeft: 10,
       marginRight: 'auto',
+      shadowColor: "#000",
     },
     backButton: {
       flexDirection: 'row',
       alignItems: 'center',
       padding: 5,
-      borderWidth: 1,
-      borderColor: '#D08770',
-      borderRadius: 25
+      // borderWidth: 1,
+      // borderColor: '#D08770',
+      borderRadius: 5,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
     },
     backIcon: {
       marginRight: 10,

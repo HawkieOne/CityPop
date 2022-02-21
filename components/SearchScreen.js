@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from './BackButton';
@@ -95,6 +95,9 @@ export default function SearchScreen() {
       backgroundColor: '#FCFCFC',
       flex: 1,
     },
+    keyboardAvoidingView: {
+      flex: 1,
+    },
     mainView: {
       flex: 1,
     },
@@ -162,6 +165,10 @@ export default function SearchScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
+      <KeyboardAvoidingView 
+        style={styles.keyboardAvoidingView} 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
 
         <BackButton />
 
@@ -188,7 +195,6 @@ export default function SearchScreen() {
                 onBlur={() => setInputFocused(false)}
                 value={text}
                 placeholder={'Enter a ' + searchType}
-                // autoFocus={true}
                 returnKeyType="search"
               />
             </View>
@@ -204,7 +210,7 @@ export default function SearchScreen() {
             <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
           </View>
         </View>
-
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }

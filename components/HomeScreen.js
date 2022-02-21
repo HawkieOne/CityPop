@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useRecoilState } from 'recoil';
 import { searchTypeState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
@@ -11,7 +11,7 @@ export default function App() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <Text style={styles.title}>CityPop</Text>
           <View style={styles.btnView}>
                 <TouchableOpacity 
@@ -37,7 +37,7 @@ export default function App() {
                   <Text style={styles.btnText}>SEARCH BY COUNTRY</Text>
                 </TouchableOpacity>
             </View>
-      </View>
+      </SafeAreaView>
   );
 }
 

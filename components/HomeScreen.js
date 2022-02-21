@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { searchTypeState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -7,35 +7,38 @@ import FlagIcon from 'react-native-vector-icons/Entypo';
 
 export default function App() {
     
-  const [type, setType] = useRecoilState(searchTypeState)
+  const setType = useSetRecoilState(searchTypeState)
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
         <Text style={styles.title}>CityPop</Text>
           <View style={styles.btnView}>
+
                 <TouchableOpacity 
-                style={[styles.btn, styles.cityButton]} 
-                onPress={() => {
-                  setType("city");
-                  navigation.push("SearchScreen");                    
-                }} 
-                accessibilityLabel="Search by city name"
+                  style={[styles.btn, styles.cityButton]} 
+                  onPress={() => {
+                    setType("city");
+                    navigation.push("SearchScreen");                    
+                  }} 
+                  accessibilityLabel="Search by city name"
                 >
                   <Icon name="city" size={20} style={styles.icon} />
                   <Text style={styles.btnText}>SEARCH BY CITY</Text>
                 </TouchableOpacity>
+
                 <TouchableOpacity 
-                style={[styles.btn, styles.countryButton]} 
-                onPress={() => {
-                    setType("country");
-                    navigation.push("SearchScreen");
-                }}
-                accessibilityLabel="Search by country name"
+                  style={[styles.btn, styles.countryButton]} 
+                  onPress={() => {
+                      setType("country");
+                      navigation.push("SearchScreen");
+                  }}
+                  accessibilityLabel="Search by country name"
                 >
                   <FlagIcon name="sweden" size={20} style={styles.icon} />
                   <Text style={styles.btnText}>SEARCH BY COUNTRY</Text>
                 </TouchableOpacity>
+                
             </View>
       </SafeAreaView>
   );

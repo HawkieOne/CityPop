@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { StyleSheet, Text, View, ScrollView, BackHandler, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import BackButton from './BackButton';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { resultCityState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,7 @@ export default function CountryResults() {
   
   const navigation = useNavigation();
   const results = useRecoilValue(resultCountryState)
-  const [cityResults, setCityResults] = useRecoilState(resultCityState);
+  const [setCityResults] = useSetRecoilState(resultCityState);
   console.log(results);
   const buttonClickedHandler = (city) => {
     setCityResults(city);
@@ -23,12 +23,15 @@ export default function CountryResults() {
       <Text style={styles.title}>{results.geonames[0].countryName}</Text>
 
       <View style={styles.citiesView}>
-        <ScrollView>
+        <ScrollView
+          alwaysBounceVertical={true}
+        >
             {results.geonames.map((city, index) => (
               <TouchableOpacity
                 key={city.geonameId}
-                // Make into subcomponent
-                // https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method
+                /**
+                * TODO: The text for every city could be in its own component
+                */
                 onPress={() => buttonClickedHandler(city)}
                 style={styles.cityTextView}
               >
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   backButton: {
-    position: 'sticky,'
   },
   title: {
     fontWeight: 'bold',

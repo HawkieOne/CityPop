@@ -26,12 +26,12 @@ export default function SearchScreen() {
 
   const searchButtonClickedHandler = () => {
     if(text === "") {
-      showErrorMessage("Please e  nter a " + searchType + " search term");
+      showErrorMessage("Please enter a " + searchType + " search term");
       return;
     }
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
-      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`;
+      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&username=weknowit&maxRows=1`;
       axios.get(apiURL)
       .then((response) => {
         handleCitySearchResponse(response);
@@ -41,7 +41,7 @@ export default function SearchScreen() {
       });
     } else if (searchType === 'country') {
       const countryCode = getCode(text);
-      const apiURL = `http://api.geonames.org/searchJSON?q=${text}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`;
+      const apiURL = `http://api.geonames.org/searchJSON?q=${text.trim()}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`;
       axios.get(apiURL)
       .then((response) => {
         handleCountrySearchResponse(response);

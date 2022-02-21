@@ -25,6 +25,10 @@ export default function SearchScreen() {
   const [inputFocused, setInputFocused] = useState(false);
 
   const searchButtonClickedHandler = () => {
+    if(text === "") {
+      showErrorMessage("Please enter a " + searchType + " search term");
+      return;
+    }
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
       const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text}&username=weknowit&maxRows=1`;

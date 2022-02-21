@@ -17,7 +17,7 @@ export default function SearchScreen() {
   const [cityResults, setCityResults] = useRecoilState(resultCityState);
   const [countryResults, setCountryResults] = useRecoilState(resultCountryState);
   const [visible, setVisible] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
   const [text, onChangeText] = React.useState("");
@@ -78,6 +78,9 @@ export default function SearchScreen() {
         <Text style={styles.title}>SEARCH BY {searchType.toUpperCase()}</Text>
 
         <View style={styles.searchView}>
+
+          <Text style={[styles.errorMessage, errorMessage && styles.errorMessageActive]}>{errorMessage}</Text>
+
           <TextInput
             style={styles.input}
             onChangeText={onChangeText}
@@ -89,12 +92,12 @@ export default function SearchScreen() {
             onPress={buttonClickedHandler}
             style={styles.roundButton1}>
               <Icon name="search" size={30} style={styles.icon} />
-          </TouchableOpacity>
-
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
+          </TouchableOpacity>          
         </View> 
 
-        <ActivityIndicator  styles={styles.loadingIndicator} size="large" color="black" animating={showLoadingIndicator} />        
+        <View style={styles.loadingIndicator}>
+          <ActivityIndicator size="large" color="black" animating={showLoadingIndicator}/>        
+        </View>
 
     </View>
   )
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: '#39B77C',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   roundButton1: {
     alignSelf: 'center',
@@ -135,10 +138,20 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   errorMessage: {
-    height: "20px",
-    color: "red",
+    height: 30,
+    color: 'white',
+    marginHorizontal: 12,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorMessageActive: {
+    backgroundColor: '#e77c02',
   },
   loadingIndicator: {
-    marginBottom: 'auto',
+    marginBottom: '100px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });

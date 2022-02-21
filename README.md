@@ -24,7 +24,8 @@ CityPop is an application in which the user can search for the population of cit
 * You can search for the city with the city name
 * You can also search for a country. If you search for a country the 20 biggest cities in the country will be displayed. Then you can click on a city to see its
   population.
-From every screen except of the home screen you can return back to an earlier screen by pressing the back button in the top left corner.
+  
+From every screen except for the home screen you can return back to an earlier screen by pressing the back button in the top left corner.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -33,7 +34,7 @@ From every screen except of the home screen you can return back to an earlier sc
 ### Built With
 
 * [React Native](https://reactnative.dev/)
-* [Expo](https://docs.expo.dev/) - Used for building and testing the application for both moile an web
+* [Expo](https://docs.expo.dev/) - Used for building and testing the application for both mobile an web
 * [Axios](https://axios-http.com/) - Used for fetching data from APIs through HTTP
 * [Country List](https://www.npmjs.com/package/country-list) - Used for converting countries to their country codes
 * [React Navigation](https://reactnavigation.org/) - Used for navigating between pages in React Native

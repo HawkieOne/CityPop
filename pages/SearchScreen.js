@@ -9,6 +9,8 @@ import { resultCityState, searchTypeState, resultCountryState } from '../atoms/a
 import { useNavigation } from '@react-navigation/native';
 const { getCode } = require('country-list');
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { apiGeoNames } from '../api/geoNames';
+
 
 export default function SearchScreen() {
 
@@ -32,25 +34,26 @@ export default function SearchScreen() {
     }
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
-      const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&featureClass=P&username=weknowit&maxRows=1`;
-      axios.get(apiURL)
-      .then((response) => {
-        handleCitySearchResponse(response);
+      // const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&featureClass=P&username=weknowit&maxRows=1`;
+      // const results = onCitySearch(apiURL).then(results => {
+      //   console.log(results.geonames[0]);
+      // })
+      // axios.get(apiURL)
+      // .then((response) => {
+      //   handleCitySearchResponse(response);
+      // })
+      // .catch(error => {
+      //   console.log(error);
+      // });
+      apiGeoNames.city(text).then((response) => {
+        console.log(response);
       })
-      .catch(error => {
-        console.log(error);
-      });
     } else if (searchType === 'country') {
       // Converts the country name to respective country code 
       const countryCode = getCode(text);
-      const apiURL = `http://api.geonames.org/searchJSON?q=${text.trim()}&country=${countryCode}&featureClass=P&orderby=population&username=weknowit&maxRows=20`;
-      axios.get(apiURL)
-      .then((response) => {
-        handleCountrySearchResponse(response);
+      apiGeoNames.city(text, countryCode).then((response) => {
+        console.log(response);
       })
-      .catch(error => {
-        console.log(error);
-      });
     }
   };
 

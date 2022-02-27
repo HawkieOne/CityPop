@@ -34,61 +34,52 @@ export default function SearchScreen() {
     }
     setShowLoadingIndicator(true);
     if (searchType === 'city') {
-      // const apiURL = `http://api.geonames.org/searchJSON?name_equals=${text.trim()}&featureClass=P&username=weknowit&maxRows=1`;
-      // const results = onCitySearch(apiURL).then(results => {
-      //   console.log(results.geonames[0]);
-      // })
-      // axios.get(apiURL)
-      // .then((response) => {
-      //   handleCitySearchResponse(response);
-      // })
-      // .catch(error => {
-      //   console.log(error);
-      // });
-      apiGeoNames.city(text).then((response) => {
-        console.log(response);
-      })
+      handleCitySearch();
     } else if (searchType === 'country') {
-      // Converts the country name to respective country code 
-      const countryCode = getCode(text);
-      apiGeoNames.city(text, countryCode).then((response) => {
-        console.log(response);
-      })
+      handleCountrySearch();
     }
   };
 
-  const handleCitySearchResponse = (response) => {
-    setShowLoadingIndicator(false);        
-    if (response.status !== 200) {
-      showErrorMessage("The API could not be reached.");          
-      return;
-    }
-    // If the api return zero results
-    if (response.data.totalResultsCount === 0) {          
-      showErrorMessage("The city was not found.");
-      return;
-    }     
-    // To ensure that the error message is gone if the user returns to this screen    
-    setErrorMessage(null);
-    setCityResults(response.data.geonames[0]);
-    navigation.push("CityResults");  
+  const handleCitySearch = () => {
+    apiGeoNames.city(text).then((response) => {
+      if (response.error) {
+        showErrorMessage(response.message.substring(0, 4) 
+                          + " " + searchType + " " + 
+                          response.message.substring(4));   
+        setShowLoadingIndicator(false);     
+        return;
+      }  
+      setShowLoadingIndicator(false);        
+      // To ensure that the error message is gone if the user returns to this screen    
+      setErrorMessage(null);
+      setCityResults(response.geonames[0]);
+      navigation.push("CityResults");        
+    })
+    .catch(error => {
+      showErrorMessage(error);  
+    })
   }
 
-  const handleCountrySearchResponse = (response) => {
-    setShowLoadingIndicator(false);
-    if (response.status !== 200) {
-      showErrorMessage("The API could not be reached.");          
-      return;
-    }
-    // If the api return zero results
-    if (response.data.totalResultsCount === 0) {
-      showErrorMessage("The country was not found.");
-      return;
-    }
-    // To ensure that the error message is gone if the user returns to this screen   
-    setErrorMessage(null);
-    setCountryResults(response.data);
-    navigation.push("CountryResults");
+  const handleCountrySearch = () => {
+    // Converts the country name to respective country code 
+    const countryCode = getCode(text);
+    apiGeoNames.country(text, countryCode).then((response) => {
+      console.log(response)
+      if (response.error) {
+        showErrorMessage(`${response.message.substring(0, 4)} ${searchType} ${response.message.substring(4)}`);   
+        setShowLoadingIndicator(false);     
+        return;
+      }  
+      setShowLoadingIndicator(false);        
+      // To ensure that the error message is gone if the user returns to this screen    
+      setErrorMessage(null);
+      console.log(response)
+      setCountryResults(response);
+      navigation.push("CountryResults");        
+    })
+    .catch(error => {
+      showErrorMessage(error);  
+    })
   }
 
   const showErrorMessage = (message) => {

@@ -57,6 +57,8 @@ export default function CountryResults() {
       fontSize: 20,
     }
   });
+
+  console.log()
   return (
     <SafeAreaView style={styles.screen}>
 

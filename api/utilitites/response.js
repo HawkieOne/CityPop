@@ -1,7 +1,10 @@
 export function handleResponse(response) {
 
     if (response.status != 200) {
-      // TODO: Make it so th result is smoothly handled in SearchScreen.js
+      return {
+        error: true,
+        message: "The data from the API could not be fetched."
+      }
     }
 
     if (response.results) {
@@ -9,6 +12,12 @@ export function handleResponse(response) {
     }
   
     if (response.data) {
+      if (response.data.totalResultsCount === 0) {
+        return {
+          error: true,
+          message: "The could not be found."
+        }
+      }
       return response.data;
     }
   

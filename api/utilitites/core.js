@@ -9,8 +9,8 @@ export class ApiCore {
         }
 
         if (options.country) {
-            this.country = (country) => {
-                return apiProvider.onCitySearch(country);
+            this.country = (country, countryCode) => {
+                return apiProvider.onCountrySearch(country, countryCode);
             }
         }
     }

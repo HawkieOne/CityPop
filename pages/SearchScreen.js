@@ -21,18 +21,33 @@ export default function SearchScreen({ route }) {
   const [inputFocused, setInputFocused] = useState(false);
 
   const searchButtonClickedHandler = () => {
-    // If the user has not entered a search term
-    if(text === "") {
-      showErrorMessage("Please enter a " + searchType + " search term");
+    if (!checkSearchIsLetters() || !checkSearchNotEmpty()) {
+      console.log("TEST")
       return;
     }
-    setShowLoadingIndicator(true);
     if (searchType === 'city') {
       handleCitySearch();
     } else if (searchType === 'country') {
       handleCountrySearch();
     }
   };
+
+  const checkSearchIsLetters = () => {
+    const regexExpression = /^[A-Za-zåÅäÄöÖ]+$/;
+      if (!text.match(regexExpression)) {
+        setErrorMessage("Only letters are allowed");
+        return false;
+      }
+      return true;
+  }
+
+  const checkSearchNotEmpty = () => {
+    if(text === "") {
+      showErrorMessage("Please enter a " + searchType + " search term");
+      return false;
+    }
+    return true;
+  }
 
   const handleCitySearch = () => {
     apiGeoNames.city(text).then((response) => {

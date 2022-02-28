@@ -1,14 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSetRecoilState } from 'recoil';
-import { searchTypeState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import FlagIcon from 'react-native-vector-icons/Entypo';
 
 export default function App() {
     
-  const setSearchType = useSetRecoilState(searchTypeState)
   const navigation = useNavigation();
 
   return (
@@ -18,9 +15,10 @@ export default function App() {
 
                 <TouchableOpacity 
                   style={[styles.btn, styles.cityButton]} 
-                  onPress={() => {
-                    setSearchType("city");                    
-                    navigation.push("SearchScreen");                    
+                  onPress={() => {                  
+                    navigation.push("SearchScreen", {
+                      searchType: "city",
+                    });                   
                   }} 
                   accessibilityLabel="Search by city name"
                 >
@@ -31,8 +29,9 @@ export default function App() {
                 <TouchableOpacity 
                   style={[styles.btn, styles.countryButton]} 
                   onPress={() => {
-                      setSearchType("country");
-                      navigation.push("SearchScreen");
+                      navigation.push("SearchScreen", {
+                        searchType: "country",
+                      }); 
                   }}
                   accessibilityLabel="Search by country name"
                 >

@@ -3,23 +3,17 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackButton from '../components/BackButton';
-import axios from 'axios';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { resultCityState, searchTypeState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 const { getCode } = require('country-list');
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { apiGeoNames } from '../api/geoNames';
 
 
-export default function SearchScreen() {
+export default function SearchScreen({ route }) {
 
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-
-  const searchType = useRecoilValue(searchTypeState);
-  const setCityResults = useSetRecoilState(resultCityState);
-  const setCountryResults = useSetRecoilState(resultCountryState);
+  const { searchType } = route.params;
   const [errorMessage, setErrorMessage] = useState(null);
   const [showLoadingIndicator, setShowLoadingIndicator] = useState(false);
 
@@ -52,8 +46,9 @@ export default function SearchScreen() {
       setShowLoadingIndicator(false);        
       // To ensure that the error message is gone if the user returns to this screen    
       setErrorMessage(null);
-      setCityResults(response.geonames[0]);
-      navigation.push("CityResults");        
+      navigation.push("CityResults", {
+        results: response.geonames[0],
+      });        
     })
     .catch(error => {
       showErrorMessage(error);  
@@ -74,8 +69,9 @@ export default function SearchScreen() {
       // To ensure that the error message is gone if the user returns to this screen    
       setErrorMessage(null);
       console.log(response)
-      setCountryResults(response);
-      navigation.push("CountryResults");        
+      navigation.push("CountryResults", {
+        results: response,
+      });        
     })
     .catch(error => {
       showErrorMessage(error);  

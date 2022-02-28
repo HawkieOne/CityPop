@@ -1,23 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BackButton from '../components/BackButton';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { resultCityState, resultCountryState } from '../atoms/atoms';
 import { useNavigation } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function CountryResults() {
+export default function CountryResults({ route }) {
   
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const results = useRecoilValue(resultCountryState)
-  const setCityResults = useSetRecoilState(resultCityState);
+  const { results } = route.params;
 
 
   const onCityClickHandler = (city) => {
-    setCityResults(city);
-    navigation.push("CityResults");
+    navigation.push("CityResults", {
+      results: city,
+    });
   };
 
 

@@ -21,7 +21,7 @@ export default function SearchScreen({ route }) {
   const [inputFocused, setInputFocused] = useState(false);
 
   const searchButtonClickedHandler = () => {
-    if (!checkSearchIsLetters() || !checkSearchNotEmpty()) {
+    if (!checkSearchNotEmpty() || !checkSearchIsLetters()) {
       console.log("TEST")
       return;
     }
@@ -42,8 +42,8 @@ export default function SearchScreen({ route }) {
   }
 
   const checkSearchNotEmpty = () => {
-    if(text === "") {
-      showErrorMessage("Please enter a " + searchType + " search term");
+    if(text.trim() === "") {
+      showErrorMessage("Please enter a " + searchType);
       return false;
     }
     return true;

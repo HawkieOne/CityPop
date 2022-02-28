@@ -22,7 +22,6 @@ export default function SearchScreen({ route }) {
 
   const searchButtonClickedHandler = () => {
     if (!checkSearchNotEmpty() || !checkSearchIsLetters()) {
-      console.log("TEST")
       return;
     }
     if (searchType === 'city') {
@@ -74,7 +73,6 @@ export default function SearchScreen({ route }) {
     // Converts the country name to respective country code 
     const countryCode = getCode(text);
     apiGeoNames.country(text, countryCode).then((response) => {
-      console.log(response)
       if (response.error) {
         showErrorMessage(`${response.message.substring(0, 4)} ${searchType} ${response.message.substring(4)}`);   
         setShowLoadingIndicator(false);     
@@ -83,7 +81,6 @@ export default function SearchScreen({ route }) {
       setShowLoadingIndicator(false);        
       // To ensure that the error message is gone if the user returns to this screen    
       setErrorMessage(null);
-      console.log(response)
       navigation.push("CountryResults", {
         results: response,
       });        

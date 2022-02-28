@@ -39,7 +39,6 @@ Every time a search is done the results are fetched dynamically from the API Geo
 * [Axios](https://axios-http.com/) - Used for fetching data from APIs through HTTP
 * [Country List](https://www.npmjs.com/package/country-list) - Used for converting countries to their country codes
 * [React Navigation](https://reactnavigation.org/) - Used for navigating between pages in React Native
-* [Recoil](https://recoiljs.org/) - Used for managing states between pages in React Native
 * [GeoNames API](http://www.geonames.org/) - API with over eleven million placenames around the world
  
 
@@ -78,10 +77,10 @@ Below is an example of how you can install and set up your app.
 
 - The app has error handling. If the user does not have internet connection this is shown for the user and if the user searchs for an non-existing city this is 
   shown.
-- If the user tries to search without entering a search term and error is shown
+- If the user tries to search without entering a search term an error is shown
+- If the user enter numbers or other characters than letters an error is shown
 - If the user has spaces behind the search term the app removes the spaces and the search is successful
 - The app uses SafeAreas through React Native to handle physical nothes on phones
-- The app uses advanced state management through Recoil to make the flow of data between components as smooth as possible.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -96,8 +95,6 @@ The app is far from perfect and has its flaws. The known ones are listed below.
   avoided with a better API call.
 - When searching for a country the 20 biggest countries is shown. However, if the API only have ten cities with a population stored the rest of the list will
   consitst of other locations with a population of zero.
-- On Android a notification at the bottom of the screen is shown. This is due to a bug in Recoil and is not something that I could fix. I could have avoided 
-  using Recoil but I discovered the bug too late in the development of the app for this to be a viable option.
   
 <!-- TESTED DEVICES -->
 ## Tested devices

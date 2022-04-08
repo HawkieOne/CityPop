@@ -16,7 +16,7 @@
 ## About The Project
 
 <div align="center">
-  <img alt="Screenshot of app" src="images/Home.png" /><
+  <img alt="Screenshot of app" src="images/Home.png" />
 </div>
 <br/>
 
